@@ -10,7 +10,15 @@
   }
 
   .submit-button {
+    background-color: #555;
     padding: 16px;
     font-size: 16px;
   }
+
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
 }
