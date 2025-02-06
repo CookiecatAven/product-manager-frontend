@@ -1,12 +1,13 @@
-import {Component} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {MatError, MatFormField, MatLabel} from '@angular/material/form-field';
-import {MatInput} from '@angular/material/input';
-import {MatButton} from '@angular/material/button';
-import {HttpClient} from '@angular/common/http';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { HttpClient } from '@angular/common/http';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { MatCardActions } from '@angular/material/card';
+import { UserControllerService } from '../../../openapi-client';
 
 @Component({
   selector: 'app-login',
@@ -19,16 +20,13 @@ import { Router, RouterLink } from '@angular/router';
     MatButton,
     MatError,
     ReactiveFormsModule,
-    MatButtonToggle,
-    MatButtonToggleGroup,
+    MatCardActions,
     RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
-  authMode: 'login' | 'register' = 'login';
-
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
@@ -37,39 +35,30 @@ export class LoginComponent {
   loading = false;
   errorMessage = '';
 
-  constructor(private http: HttpClient, private router: Router) {}
-
-  toggleAuthMode() {
-    if (this.authMode === 'login') {
-      this.router.navigate(['/register']);
-    } else {
-      this.authMode = 'login';
-    }
+  constructor(private http: HttpClient, private router: Router, private userController: UserControllerService) {
   }
 
   onSubmit() {
-    if (this.authMode === 'login') {
-      this.login();
-    }
-  }
-
-  login() {
     if (this.loginForm.invalid) return;
     this.loading = true;
     this.errorMessage = '';
 
-    const loginData = this.loginForm.value;
-    this.http.post<{ token: string }>('https://294.cyrotech.ch/api/auth/login', loginData)
-      .subscribe({
-        next: (response) => {
-          localStorage.setItem('token', response.token);
-          console.log('Login erfolgreich!', response);
-        },
-        error: (error) => {
-          this.errorMessage = error.error?.message || 'Login fehlgeschlagen.';
-          this.loading = false;
-        },
-        complete: () => this.loading = false
-      });
+    const loginData = this.loginForm.value as {
+      email: string;
+      password: string;
+    };
+    this.userController.login(loginData).subscribe({
+      next: (response) => {
+        if (!response.token) throw new Error('No token received from server');
+
+        localStorage.setItem('token', response.token);
+        console.log('Login erfolgreich!', response);
+      },
+      error: (error) => {
+        this.errorMessage = error.error?.message || 'Login fehlgeschlagen.';
+        this.loading = false;
+      },
+      complete: () => this.loading = false
+    })
   }
 }
