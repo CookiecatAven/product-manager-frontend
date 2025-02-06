@@ -1,6 +1,13 @@
+
 <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
   <h2>Login</h2>
 
+  <div class="toggle-container">
+    <mat-button-toggle-group name="legacy" aria-label="Font Style">
+      <mat-button-toggle value="login"routerLink="/auth/login">Login</mat-button-toggle>
+      <mat-button-toggle value="register"routerLink="/auth/register">Registrieren</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
   <!-- E-Mail Feld -->
   <mat-form-field appearance="outline">
     <mat-label>E-Mail</mat-label>

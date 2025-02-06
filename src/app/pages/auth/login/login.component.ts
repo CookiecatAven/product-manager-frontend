@@ -5,6 +5,8 @@ import {MatInput} from '@angular/material/input';
 import {MatButton} from '@angular/material/button';
 import {HttpClient} from '@angular/common/http';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import { MatButtonToggle, MatButtonToggleGroup } from '@angular/material/button-toggle';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,12 +18,17 @@ import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/
     MatInput,
     MatButton,
     MatError,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatButtonToggle,
+    MatButtonToggleGroup,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
+  authMode: 'login' | 'register' = 'login';
+
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [Validators.required, Validators.minLength(6)])
@@ -30,16 +37,28 @@ export class LoginComponent {
   loading = false;
   errorMessage = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
+
+  toggleAuthMode() {
+    if (this.authMode === 'login') {
+      this.router.navigate(['/register']);
+    } else {
+      this.authMode = 'login';
+    }
+  }
 
   onSubmit() {
-    if (this.loginForm.invalid) return;
+    if (this.authMode === 'login') {
+      this.login();
+    }
+  }
 
+  login() {
+    if (this.loginForm.invalid) return;
     this.loading = true;
     this.errorMessage = '';
 
     const loginData = this.loginForm.value;
-
     this.http.post<{ token: string }>('https://294.cyrotech.ch/api/auth/login', loginData)
       .subscribe({
         next: (response) => {

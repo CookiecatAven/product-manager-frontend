@@ -9,5 +9,4 @@ export const authRoutes: Routes = [
     path: 'register',
     loadComponent: () => import('./register/register.component').then(m => m.RegisterComponent)
   },
-  // Weitere Auth-Routen hier
 ];
