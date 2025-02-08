@@ -4,7 +4,7 @@ import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatCardActions } from '@angular/material/card';
 import { UserControllerService } from '../../../openapi-client';
 
@@ -28,14 +28,16 @@ import { UserControllerService } from '../../../openapi-client';
 export class LoginComponent {
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(6)])
+    password: new FormControl('', [Validators.required, Validators.minLength(8),Validators.pattern(/^(?=.*\d)(?=.*[\W_]).{6,}$/)])
   });
 
   loading = false;
   errorMessage = '';
 
-  constructor(private userController: UserControllerService) {
-  }
+  constructor(
+    private userController: UserControllerService,
+  private router: Router
+  ){}
 
   onSubmit() {
     if (this.loginForm.invalid) return;
@@ -52,6 +54,7 @@ export class LoginComponent {
 
         localStorage.setItem('ACCESS_TOKEN', response.token);
         console.log('Login erfolgreich!', response);
+        this.router.navigate(['/products']);
       },
       error: (error) => {
         this.errorMessage = error.error?.message || 'Login fehlgeschlagen.';
