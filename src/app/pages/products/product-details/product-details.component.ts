@@ -10,7 +10,7 @@ import {
   MatCardTitle
 } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
-import { CommonModule, NgIf, NgOptimizedImage } from '@angular/common';
+import { CommonModule, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-product-details',
@@ -25,7 +25,6 @@ import { CommonModule, NgIf, NgOptimizedImage } from '@angular/common';
     NgIf,
     CommonModule,
     MatCardModule,
-    NgOptimizedImage
   ],
   styleUrls: ['./product-details.component.scss']
 })
@@ -50,7 +49,7 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   updateProduct() {
-    // wenn wir kein Produkt haben, können wir nichts updaten
+    // wenn ich kein Produkt haben, kann ich nichts updaten
     if (!this.product) {
       return;
     }
