@@ -35,7 +35,7 @@ export class LoginComponent {
   loading = false;
   errorMessage = '';
 
-  constructor(private http: HttpClient, private router: Router, private userController: UserControllerService) {
+  constructor(private userController: UserControllerService) {
   }
 
   onSubmit() {
