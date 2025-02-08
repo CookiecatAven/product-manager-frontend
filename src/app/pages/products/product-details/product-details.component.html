@@ -1,0 +1,16 @@
+<mat-card *ngIf="product" class="product-details-card">
+  <mat-card-title>{{ product.name }}</mat-card-title>
+
+  <img mat-card-image [src]="product.image" alt="{{ product.name }}">
+
+  <mat-card-content>
+    <p><strong>SKU:</strong> {{ product.sku }}</p>
+    <p><strong>Preis:</strong> {{ product.price }} CHF</p>
+    <p><strong>Bestand:</strong> {{ product.stock }}</p>
+  </mat-card-content>
+
+  <mat-card-actions *ngIf="isAdmin">
+    <button mat-button color="primary" (click)="updateProduct()">Speichern</button>
+    <button mat-button color="warn" (click)="deleteProduct()">Löschen</button>
+  </mat-card-actions>
+</mat-card>
