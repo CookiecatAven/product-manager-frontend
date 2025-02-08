@@ -1,8 +1,10 @@
-<h1>Produkte</h1>
-
-<button *ngIf="isAdmin" mat-raised-button color="primary" (click)="createNewProduct()">
-  Neues Produkt erstellen
-</button>
+<div class="products-header">
+  <h1>Produkte</h1>
+  <button *ngIf="isAdmin$ | async" mat-raised-button color="primary" (click)="createNewProduct()">
+    <mat-icon>add</mat-icon>
+    Produkt hinzufügen
+  </button>
+</div>
 
 <!-- Products grid -->
 <mat-grid-list *ngIf="!loading && !error" cols="3" gutterSize="16" rowHeight="350px">

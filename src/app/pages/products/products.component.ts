@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
-import { NgForOf, NgIf } from '@angular/common';
+import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
 import { ProductControllerService, ProductShowDto } from '../../openapi-client';
 import { MatCard, MatCardContent, MatCardHeader, MatCardImage, MatCardTitle } from '@angular/material/card';
-import { RouterLink, RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterModule } from '@angular/router';
 import { MatButton } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
+import { MatIcon } from '@angular/material/icon';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pm-products',
@@ -21,7 +23,9 @@ import { AuthService } from '../../services/auth.service';
     MatCardImage,
     RouterLink,
     RouterModule,
-    MatButton
+    MatButton,
+    MatIcon,
+    AsyncPipe
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
@@ -30,21 +34,22 @@ export class ProductsComponent implements OnInit {
   products: ProductShowDto[] = [];
   error: string | null = null;
   loading = true;
-  isAdmin: boolean = false;
+  isAdmin$: Observable<boolean>;
 
   constructor(
     private productsController: ProductControllerService,
-  private authService: AuthService
+  private authService: AuthService,
+  private router: Router
   ) {
+  this.isAdmin$ = this.authService.isUserAdmin();
   }
 
   ngOnInit(): void {
     this.loadProducts();
-    //this.isAdmin = this.authService.isUserAdmin();
   }
+
   createNewProduct() {
-    // Hier kannst du z.B. zur Produkt-Erstellungsseite navigieren
-    console.log("Neues Produkt erstellen...");
+    this.router.navigate(['/products/create']);
   }
 
   private loadProducts(): void {

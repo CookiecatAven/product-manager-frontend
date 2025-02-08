@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,8 +13,17 @@ export class AuthService {
   login(credentials: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, credentials);
   }
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
 
   logout(): void {
     localStorage.removeItem('token');
+  }
+
+  private userRole: string = 'admin';
+
+  isUserAdmin(): Observable<boolean> {
+    return of(this.userRole === 'admin'); // In echtem Szenario aus API holen
   }
 }
