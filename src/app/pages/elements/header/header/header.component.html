@@ -1,0 +1,22 @@
+<mat-toolbar color="primary">
+  <span>Product Manager</span>
+
+  <span class="spacer"></span>
+
+  <!--  &lt;!&ndash; Dropdown-Menü &ndash;&gt;-->
+  <!--  <button mat-button [matMenuTriggerFor]="categoriesMenu">-->
+  <!--    Categories-->
+  <!--    <mat-icon>arrow_drop_down</mat-icon>-->
+  <!--  </button>-->
+
+  <mat-menu #categoriesMenu="matMenu">
+    <button mat-menu-item routerLink="/categories/list">
+      <mat-icon>list</mat-icon>
+      <span>List</span>
+    </button>
+    <button mat-menu-item routerLink="/categories/create">
+      <mat-icon>add</mat-icon>
+      <span>Create</span>
+    </button>
+  </mat-menu>
+</mat-toolbar>
