@@ -1,7 +1,8 @@
+<h1>Produkte</h1>
 <!-- Products grid -->
 <mat-grid-list *ngIf="!loading && !error" cols="3" gutterSize="16" rowHeight="350px">
   <mat-grid-tile *ngFor="let product of products" class="product-tile">
-    <mat-card class="product-card" appearance="outlined">
+    <mat-card class="product-card" appearance="outlined" [routerLink]="['/products', product.id]" style="cursor: pointer;">
       <mat-card-header>
         <mat-card-title>{{ product.name }}</mat-card-title>
       </mat-card-header>

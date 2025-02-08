@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { NgForOf, NgIf } from '@angular/common';
 import { ProductControllerService, ProductShowDto } from '../../openapi-client';
 import { MatCard, MatCardContent, MatCardHeader, MatCardImage, MatCardTitle } from '@angular/material/card';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'pm-products',
@@ -15,12 +16,14 @@ import { MatCard, MatCardContent, MatCardHeader, MatCardImage, MatCardTitle } fr
     MatCardTitle,
     MatCardContent,
     NgIf,
-    MatCardImage
+    MatCardImage,
+    RouterLink,
+    RouterModule
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
 })
-export class ProductsComponent {
+export class ProductsComponent implements OnInit {
   products: ProductShowDto[] = [];
   error: string | null = null;
   loading = true;
