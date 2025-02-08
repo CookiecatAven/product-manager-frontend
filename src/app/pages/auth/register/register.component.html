@@ -1,1 +1,77 @@
-<p>register works!</p>
+<mat-card class="register-card">
+  <mat-card-header>
+    <h2>Registrieren</h2>
+  </mat-card-header>
+  <mat-card-content>
+    <form class="register-form" [formGroup]="registerForm" (ngSubmit)="submitForm()">
+
+      <mat-form-field appearance="outline">
+        <mat-label>Vorname</mat-label>
+        <input matInput formControlName="firstName" placeholder="Dein Vorname">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Nachname</mat-label>
+        <input matInput formControlName="lastName" placeholder="Dein Nachname">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Straße</mat-label>
+        <input matInput formControlName="street" placeholder="Deine Straße">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>PLZ</mat-label>
+        <input matInput formControlName="zip" placeholder="Deine Postleitzahl">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Stadt</mat-label>
+        <input matInput formControlName="city" placeholder="Deine Stadt">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Land</mat-label>
+        <input matInput formControlName="country" placeholder="Dein Land (2 Zeichen)">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Telefon</mat-label>
+        <input matInput formControlName="phone" placeholder="Festnetz">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Mobiltelefon</mat-label>
+        <input matInput formControlName="mobilePhone" placeholder="Mobiltelefon">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>E-Mail</mat-label>
+        <input matInput type="email" formControlName="email" placeholder="Deine E-Mail">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Passwort</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="Dein Passwort">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Passwort bestätigen</mat-label>
+        <input matInput type="password" formControlName="confirmPassword" placeholder="Passwort bestätigen">
+      </mat-form-field>
+
+      <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+      <mat-card-actions>
+        <button mat-flat-button class="submit-button white-text" type="submit" [disabled]="registerForm.invalid || loading">
+          <span *ngIf="!loading">Registrieren</span>
+          <span *ngIf="loading">Wird geladen...</span>
+        </button>
+      </mat-card-actions>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <a routerLink="/auth/login" class="white-text">Bereits registriert? Hier einloggen</a>
+  </mat-card-actions>
+</mat-card>

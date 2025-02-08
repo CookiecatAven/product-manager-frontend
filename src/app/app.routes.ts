@@ -19,10 +19,10 @@ export const routes: Routes = [
   //   path: 'general',
   //   loadChildren: () => import('./pages/general/general.routes').then(m => m.generalRoutes),
   // },
-  // {
-  //   path: 'products',
-  //   loadChildren: () => import('./pages/products/products.routes').then(m => m.productsRoutes),
-  // },
+  {
+    path: 'products',
+    loadChildren: () => import('./pages/products/products.routes').then(m => m.productsRoutes),
+  },
   // {
   //   path: 'users',
   //   loadChildren: () => import('./pages/users/users.routes').then(m => m.usersRoutes),

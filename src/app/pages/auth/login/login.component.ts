@@ -51,7 +51,7 @@ export class LoginComponent {
       next: (response) => {
         if (!response.token) throw new Error('No token received from server');
 
-        localStorage.setItem('token', response.token);
+        localStorage.setItem('ACCESS_TOKEN', response.token);
         console.log('Login erfolgreich!', response);
       },
       error: (error) => {

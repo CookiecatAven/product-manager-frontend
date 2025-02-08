@@ -4,6 +4,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatMenuModule} from '@angular/material/menu';
 import {RouterLink, RouterOutlet} from '@angular/router';
+import { HeaderComponent } from './pages/elements/header/header/header.component';
+import { FooterComponent } from './pages/elements/footer/footer/footer.component';
 
 @Component({
   selector: 'pm-root',
@@ -15,6 +17,8 @@ import {RouterLink, RouterOutlet} from '@angular/router';
     MatMenuModule,
     RouterOutlet,
     RouterLink,
+    HeaderComponent,
+    FooterComponent,
   ],
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
