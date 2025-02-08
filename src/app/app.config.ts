@@ -6,6 +6,7 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { ApiModule, Configuration } from './openapi-client';
 import { authorizationInterceptor } from './interceptors/authorization.interceptor';
 import { provideToastr } from 'ngx-toastr';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
       withInterceptors([authorizationInterceptor])
     ),
     provideToastr(),
+    provideAnimations(),
     importProvidersFrom(
       ApiModule.forRoot(() => {
         // todo checken, ob das ohne basePath geht, sonst das wieder reinkommentieren und zeile 25 löschen
