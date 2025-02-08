@@ -14,9 +14,11 @@
         <mat-card-title>{{ product.name }}</mat-card-title>
       </mat-card-header>
 
-      <img mat-card-image [src]="product.image" [alt]="product.name"
-           onerror="this.src = '/assets/dotdotdot.png'">
-      <!-- https://stackoverflow.com/questions/36026428/angular2-show-placeholder-image-if-img-src-is-not-valid-->
+      <div class="image-container">
+        <img mat-card-image [src]="product.image" [alt]="product.name"
+             onerror="this.src = '/assets/dotdotdot.png'">
+        <!-- https://stackoverflow.com/questions/36026428/angular2-show-placeholder-image-if-img-src-is-not-valid-->
+      </div>
 
       <mat-card-content>
         <p class="price" *ngIf="product.price">{{ product.price}} CHF</p>
