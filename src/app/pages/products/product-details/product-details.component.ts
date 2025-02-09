@@ -11,6 +11,7 @@ import {
 } from '@angular/material/card';
 import { MatButton } from '@angular/material/button';
 import { CommonModule, NgIf } from '@angular/common';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-product-details',
@@ -29,6 +30,7 @@ import { CommonModule, NgIf } from '@angular/common';
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
+  productIdString: string = '';
   product: ProductDetailDto | null = null;
 
   constructor(
@@ -40,8 +42,8 @@ export class ProductDetailsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const idString = this.route.snapshot.paramMap.get('id');
-    const id = idString ? Number.parseInt(idString) : null;
+    this.productIdString = this.route.snapshot.paramMap.get('id') || '';
+    const id = this.productIdString ? Number.parseInt(this.productIdString) : null;
     if (id) {
       this.productControllerService.getProductById(id).subscribe((data) => {
         this.product = data;
@@ -49,15 +51,15 @@ export class ProductDetailsComponent implements OnInit {
     }
   }
 
-  updateProduct() {
-    // wenn ich kein Produkt haben, kann ich nichts updaten
+  updateProduct(): void {
+    // wenn wir kein Produkt haben, können wir nichts bearbeiten
     if (!this.product) {
-      return;
+      return
     }
 
-    this.productControllerService.updateProductById(this.product.id, this.product).subscribe(() => {
-      alert('Produkt aktualisiert!');
-    });
+    if (this.product) {
+      this.router.navigateByUrl(`/products/edit/${this.product.id}`); // Weiterleitung zur Modify-Seite
+    }
   }
 
   deleteProduct() {

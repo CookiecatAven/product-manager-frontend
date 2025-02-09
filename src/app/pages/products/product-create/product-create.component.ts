@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatSelectModule } from '@angular/material/select';
-import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import { MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { MatSelect } from '@angular/material/select';
+import { MatCheckbox } from '@angular/material/checkbox';
 import { Router, RouterLink } from '@angular/router';
-import { ProductControllerService, CategoryControllerService } from '../../../openapi-client';
-import { MatCardModule } from '@angular/material/card';
+import { CategoryControllerService, ProductControllerService } from '../../../openapi-client';
+import { MatCard, MatCardContent, MatCardHeader, MatCardTitle } from '@angular/material/card';
+import { MatOption } from '@angular/material/core';
 
 @Component({
   selector: 'app-product-create',
@@ -16,12 +17,18 @@ import { MatCardModule } from '@angular/material/card';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    MatSelectModule,
-    MatCheckboxModule,
-    MatCardModule,
+    MatButton,
+    MatCheckbox,
+    MatError,
+    MatFormField,
+    MatInput,
+    MatLabel,
+    MatOption,
+    MatSelect,
+    MatCard,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
     RouterLink
   ],
   templateUrl: './product-create.component.html',
@@ -65,7 +72,7 @@ export class ProductCreateComponent implements OnInit {
     });
   }
 
-  onSubmit() {
+  protected onSubmit() {
     if (this.productForm.invalid) return;
 
     this.loading = true;

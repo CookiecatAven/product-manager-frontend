@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatGridList, MatGridTile } from '@angular/material/grid-list';
-import { AsyncPipe, NgForOf, NgIf } from '@angular/common';
+import { NgForOf, NgIf } from '@angular/common';
 import { ProductControllerService, ProductShowDto } from '../../openapi-client';
 import { MatCard, MatCardContent, MatCardHeader, MatCardImage, MatCardTitle } from '@angular/material/card';
 import { Router, RouterLink, RouterModule } from '@angular/router';
 import { MatButton } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
 import { MatIcon } from '@angular/material/icon';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'pm-products',
@@ -24,8 +23,7 @@ import { Observable } from 'rxjs';
     RouterLink,
     RouterModule,
     MatButton,
-    MatIcon,
-    AsyncPipe
+    MatIcon
   ],
   templateUrl: './products.component.html',
   styleUrl: './products.component.scss'
