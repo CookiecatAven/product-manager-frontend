@@ -2,9 +2,11 @@ import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { jwtDecode } from 'jwt-decode';
 import { JwtPayload } from 'jwt-decode';
+import { AuthService } from '../services/auth.service';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const router = inject(Router);
+  const authService = inject(AuthService);
   const token = localStorage.getItem('ACCESS_TOKEN');
 
   // Immer Zugriff auf das Dashboard
@@ -14,7 +16,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   // Falls kein Token vorhanden ist → Weiterleitung zur Login-Seite
   if (!token) {
-    console.warn('⚠ Kein Token gefunden, Umleitung zur Login-Seite.');
+    console.warn('Kein Token gefunden, Umleitung zur Login-Seite.');
     router.navigate(['/auth/login']);
     return false;
   }
@@ -26,8 +28,8 @@ export const authGuard: CanActivateFn = (route, state) => {
 
     // Token ist abgelaufen → Weiterleitung zur Login-Seite
     if (decoded.exp && decoded.exp < currentTime) {
-      console.warn('⚠ Token abgelaufen, Umleitung zur Login-Seite.');
-      localStorage.removeItem('ACCESS_TOKEN');
+      console.warn('Token abgelaufen, Umleitung zur Login-Seite.');
+      authService.logout()
       router.navigate(['/auth/login']);
       return false;
     }
@@ -53,8 +55,8 @@ export const authGuard: CanActivateFn = (route, state) => {
 
     return true;
   } catch (error) {
-    console.error('🚨 Fehler beim Dekodieren des Tokens:', error);
-    localStorage.removeItem('ACCESS_TOKEN');
+    console.error('Fehler beim Dekodieren des Tokens:', error);
+    authService.logout()
     router.navigate(['/auth/login']);
     return false;
   }
