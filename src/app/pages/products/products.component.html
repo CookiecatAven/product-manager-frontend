@@ -1,6 +1,6 @@
 <div class="products-header">
   <h1>Produkte</h1>
-  <button *ngIf="authService.isUserAdmin()" mat-raised-button color="primary" (click)="createNewProduct()">
+  <button *ngIf="authService.isUserAdmin()" mat-raised-button color="primary" routerLink="/products/create">
     <mat-icon>add</mat-icon>
     Produkt hinzufügen
   </button>
@@ -8,8 +8,8 @@
 
 <!-- Products grid -->
 <mat-grid-list *ngIf="!loading && !error" cols="3" gutterSize="16" rowHeight="350px">
-  <mat-grid-tile *ngFor="let product of products" class="product-tile">
-    <mat-card class="product-card" appearance="outlined" [routerLink]="['/products', product.id]" style="cursor: pointer;">
+  <mat-grid-tile *ngFor="let product of products">
+    <mat-card appearance="outlined" [routerLink]="['/products', product.id]" style="cursor: pointer;">
       <mat-card-header>
         <mat-card-title>{{ product.name }}</mat-card-title>
       </mat-card-header>

@@ -3,7 +3,7 @@ import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { NgForOf, NgIf } from '@angular/common';
 import { ProductControllerService, ProductShowDto } from '../../openapi-client';
 import { MatCard, MatCardContent, MatCardHeader, MatCardImage, MatCardTitle } from '@angular/material/card';
-import { Router, RouterLink, RouterModule } from '@angular/router';
+import { RouterLink, RouterModule } from '@angular/router';
 import { MatButton } from '@angular/material/button';
 import { AuthService } from '../../services/auth.service';
 import { MatIcon } from '@angular/material/icon';
@@ -35,17 +35,12 @@ export class ProductsComponent implements OnInit {
 
   constructor(
     private productsController: ProductControllerService,
-    protected authService: AuthService,
-    private router: Router
+    protected authService: AuthService
   ) {
   }
 
   ngOnInit(): void {
     this.loadProducts();
-  }
-
-  createNewProduct() {
-    this.router.navigate(['/products/create']);
   }
 
   private loadProducts(): void {

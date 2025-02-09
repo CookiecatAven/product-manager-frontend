@@ -1,7 +1,6 @@
 import { Routes } from '@angular/router';
 import { authGuard } from '../../guards/auth.guard';
 
-let ProductDetailsComponent;
 export const productsRoutes: Routes = [
   {
     path: '',
