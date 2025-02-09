@@ -16,3 +16,8 @@
     <button mat-button color="warn" (click)="deleteProduct()">Löschen</button>
   </mat-card-actions>
 </mat-card>
+
+<mat-card *ngIf="product === null" class="product-details-card">
+  <mat-card-title>Produkt mit ID {{ this.productIdString }} konnte nicht gefunden werden</mat-card-title>
+</mat-card>
+

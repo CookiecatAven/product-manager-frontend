@@ -14,11 +14,16 @@ export const productsRoutes: Routes = [
     canActivate: [authGuard],
     data: { role: 'admin' }
   },
-
   {
     path: ':id',
     loadComponent: () => import('./product-details/product-details.component')
       .then(m => m.ProductDetailsComponent)
-  }
-
+  },
+  {
+    path: 'edit/:id',
+    loadComponent: () => import('./product-edit/product-edit.component')
+      .then(m => m.ProductEditComponent),
+    canActivate: [authGuard],
+    data: { role: 'admin' }
+  },
 ];
