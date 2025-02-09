@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 import { NgForOf, NgIf } from '@angular/common';
 import { ProductControllerService, ProductShowDto } from '../../openapi-client';
 import { MatCard, MatCardContent, MatCardHeader, MatCardImage, MatCardTitle } from '@angular/material/card';
@@ -11,8 +10,6 @@ import { MatIcon } from '@angular/material/icon';
 @Component({
   selector: 'pm-products',
   imports: [
-    MatGridList,
-    MatGridTile,
     NgForOf,
     MatCard,
     MatCardHeader,

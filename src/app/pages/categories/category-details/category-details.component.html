@@ -14,9 +14,8 @@
   </div>
 
   <!-- Products grid -->
-  <mat-grid-list cols="3" gutterSize="16" rowHeight="350px">
-    <mat-grid-tile *ngFor="let product of category.products">
-      <mat-card appearance="outlined" [routerLink]="['/products', product.id]" style="cursor: pointer;">
+  <div class="products-container">
+      <mat-card *ngFor="let product of category.products" appearance="outlined" [routerLink]="['/products', product.id]" style="cursor: pointer;">
         <mat-card-header>
           <mat-card-title>{{ product.name }}</mat-card-title>
         </mat-card-header>
@@ -31,8 +30,7 @@
           <p class="price" *ngIf="product.price">{{ product.price}} CHF</p>
         </mat-card-content>
       </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+  </div>
 </ng-container>
 
 <mat-card *ngIf="!isLoading && category === null" class="category-details-card">

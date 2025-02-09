@@ -6,18 +6,17 @@
 }
 
 .categories-container {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 10px;
   color: white;
 
   mat-card {
-    flex: 0 0 250px;
-    min-width: 250px;
-    height: 150px;
+    height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
     word-wrap: anywhere;
   }
 }

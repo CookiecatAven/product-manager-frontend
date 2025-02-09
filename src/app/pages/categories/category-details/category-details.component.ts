@@ -6,7 +6,6 @@ import { CategoryControllerService, CategoryDetailDto } from '../../../openapi-c
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import { MatIcon } from '@angular/material/icon';
-import { MatGridList, MatGridTile } from '@angular/material/grid-list';
 
 @Component({
   selector: 'pm-categories-details',
@@ -20,8 +19,6 @@ import { MatGridList, MatGridTile } from '@angular/material/grid-list';
     MatCardContent,
     MatCardHeader,
     MatCardImage,
-    MatGridList,
-    MatGridTile,
     NgForOf
   ],
   templateUrl: './category-details.component.html',
