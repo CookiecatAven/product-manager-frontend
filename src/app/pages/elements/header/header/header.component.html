@@ -20,13 +20,13 @@
   </div>
 
   <div class="user-section">
-    <div *ngIf="authService.isUserLoggedIn()">
+    <ng-container *ngIf="authService.isUserLoggedIn()">
       <span>Eingeloggt als {{authService.getUserEmail()}}</span>
       <a mat-button routerLink="/auth/logout">
         <mat-icon>logout</mat-icon>
         Ausloggen
       </a>
-    </div>
+    </ng-container>
     <a *ngIf="!authService.isUserLoggedIn()" mat-button routerLink="/auth/login">
       <mat-icon>login</mat-icon>
       <span>Einloggen</span>
