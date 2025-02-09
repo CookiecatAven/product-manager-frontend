@@ -3,11 +3,12 @@ import { MatIcon } from '@angular/material/icon';
 import { MatToolbar } from '@angular/material/toolbar';
 import { RouterLink } from '@angular/router';
 import { MatAnchor } from '@angular/material/button';
-import { AuthService } from '../../../../services/auth.service';
+import { AuthService } from '../../../services/auth.service';
 import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'pm-header',
+  standalone: true,
   imports: [
     MatIcon,
     MatToolbar,

@@ -4,8 +4,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from './pages/elements/header/header/header.component';
-import { FooterComponent } from './pages/elements/footer/footer/footer.component';
+import { HeaderComponent } from './pages/elements/header/header.component';
+import { FooterComponent } from './pages/elements/footer/footer.component';
 
 @Component({
   selector: 'pm-root',

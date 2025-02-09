@@ -3,6 +3,7 @@ import { MatToolbar } from '@angular/material/toolbar';
 
 @Component({
   selector: 'pm-footer',
+  standalone: true,
   imports: [
     MatToolbar
   ],
