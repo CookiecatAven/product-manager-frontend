@@ -6,11 +6,11 @@
         <mat-icon>storefront</mat-icon>
         <span>Produkte</span>
       </a>
+      <a mat-button routerLink="/categories">
+        <mat-icon>category</mat-icon>
+        <span>Kategorien</span>
+      </a>
       <ng-container *ngIf="authService.isUserAdmin()">
-        <a mat-button routerLink="/categories">
-          <mat-icon>category</mat-icon>
-          <span>Kategorien</span>
-        </a>
         <a mat-button routerLink="/users">
           <mat-icon>group</mat-icon>
           <span>Benutzer</span>

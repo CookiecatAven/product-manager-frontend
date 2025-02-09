@@ -1,0 +1,23 @@
+.categories-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.categories-container {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: white;
+
+  mat-card {
+    flex: 0 0 250px;
+    min-width: 250px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    word-wrap: anywhere;
+  }
+}

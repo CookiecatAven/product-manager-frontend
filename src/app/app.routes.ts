@@ -11,14 +11,10 @@ export const routes: Routes = [
     path: 'auth',
     loadChildren: () => import('./pages/auth/auth.routes').then(m => m.authRoutes),
   },
-  // {
-  //   path: 'categories',
-  //   loadChildren: () => import('./pages/categories/categories.routes').then(m => m.categoriesRoutes),
-  // },
-  // {
-  //   path: 'general',
-  //   loadChildren: () => import('./pages/general/general.routes').then(m => m.generalRoutes),
-  // },
+  {
+    path: 'categories',
+    loadChildren: () => import('./pages/categories/categories.routes').then(m => m.categoriesRoutes),
+  },
   {
     path: 'products',
     loadChildren: () => import('./pages/products/products.routes').then(m => m.productsRoutes),
