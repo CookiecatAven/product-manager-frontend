@@ -15,8 +15,8 @@ export const categoriesRoutes: Routes = [
   },
   {
     path: ':id',
-    loadComponent: () => import('./categories-details/categories-details.component')
-      .then(m => m.CategoriesDetailsComponent)
+    loadComponent: () => import('./category-details/category-details.component')
+      .then(m => m.CategoryDetailsComponent)
   },
   {
     path: 'edit/:id',
