@@ -34,14 +34,12 @@ export class ProductsComponent implements OnInit {
   products: ProductShowDto[] = [];
   error: string | null = null;
   loading = true;
-  isAdmin$: Observable<boolean>;
 
   constructor(
     private productsController: ProductControllerService,
-  private authService: AuthService,
-  private router: Router
+    protected authService: AuthService,
+    private router: Router
   ) {
-  this.isAdmin$ = this.authService.isUserAdmin();
   }
 
   ngOnInit(): void {
