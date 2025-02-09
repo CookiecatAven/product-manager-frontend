@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatInput } from '@angular/material/input';
-import { MatButton } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
-import { MatCardActions } from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { UserControllerService } from '../../../openapi-client';
 
 @Component({
@@ -13,13 +13,11 @@ import { UserControllerService } from '../../../openapi-client';
   standalone: true,
   imports: [
     CommonModule,
-    MatFormField,
-    MatLabel,
-    MatInput,
-    MatButton,
-    MatError,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatCardModule,
     ReactiveFormsModule,
-    MatCardActions,
     RouterLink
   ],
   templateUrl: './login.component.html',
