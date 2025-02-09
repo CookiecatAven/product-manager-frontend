@@ -1,0 +1,29 @@
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 400px;
+  margin: auto;
+
+  input {
+    color: black;
+  }
+
+  mat-form-field {
+    color: #555555;
+    width: 100%;
+  }
+
+  .submit-button {
+    background-color: lightgrey;
+    color: black;
+    padding: 16px;
+    font-size: 16px;
+  }
+
+  .error-message {
+    color: red;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+}

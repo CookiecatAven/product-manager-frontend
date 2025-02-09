@@ -1,0 +1,37 @@
+<form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <h2>Login</h2>
+
+  <div class="input"> <!-- E-Mail Feld -->
+    <mat-form-field appearance="outline">
+      <mat-label>E-Mail</mat-label>
+      <input matInput formControlName="email" placeholder="Deine E-Mail">
+      <mat-error *ngIf="loginForm.get('email')?.invalid && loginForm.get('email')?.touched">
+        <span *ngIf="loginForm.get('email')?.errors?.['required']">E-Mail ist erforderlich.</span>
+        <span *ngIf="loginForm.get('email')?.errors?.['email']">Bitte eine gültige E-Mail eingeben.</span>
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Passwort Feld -->
+    <mat-form-field appearance="outline">
+      <mat-label>Passwort</mat-label>
+      <input matInput formControlName="password" type="password" placeholder="Dein Passwort">
+      <mat-error *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+        <span *ngIf="loginForm.get('password')?.errors?.['required']">Passwort ist erforderlich.</span>
+        <span *ngIf="loginForm.get('password')?.errors?.['minlength']">Passwort ist nicht korrekt.</span>
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Fehlermeldung vom Server -->
+  <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <!-- Login-Button -->
+  <button mat-flat-button color="primary" class="submit-button" type="submit" [disabled]="loginForm.invalid || loading">
+    <span *ngIf="!loading">Einloggen</span>
+    <span *ngIf="loading">Wird geladen...</span>
+  </button>
+
+  <mat-card-actions>
+    <a routerLink="/auth/register" class="white-text">Noch keinen Account? Hier registrieren</a>
+  </mat-card-actions>
+</form>

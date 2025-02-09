@@ -1,0 +1,39 @@
+<ng-container *ngIf="!isLoading && category">
+  <div class="category-header">
+    <h1>{{category.name}}</h1>
+    <div class="actions" *ngIf="authService.isUserAdmin()">
+      <button mat-raised-button color="primary" routerLink="/categories/edit/{{category.id}}">
+        <mat-icon>edit</mat-icon>
+        Kategorie bearbeiten
+      </button>
+      <button mat-raised-button color="primary" (click)="deleteCategory()">
+        <mat-icon>delete</mat-icon>
+        Kategorie löschen
+      </button>
+    </div>
+  </div>
+
+  <!-- Products grid -->
+  <div class="products-container">
+      <mat-card *ngFor="let product of category.products" appearance="outlined" [routerLink]="['/products', product.id]" style="cursor: pointer;">
+        <mat-card-header>
+          <mat-card-title>{{ product.name }}</mat-card-title>
+        </mat-card-header>
+
+        <div class="image-container">
+          <img mat-card-image [src]="product.image" [alt]="product.name"
+               onerror="this.src = '/assets/no-image.png'">
+          <!-- https://stackoverflow.com/questions/36026428/angular2-show-placeholder-image-if-img-src-is-not-valid-->
+        </div>
+
+        <mat-card-content>
+          <p class="price" *ngIf="product.price">{{ product.price}} CHF</p>
+        </mat-card-content>
+      </mat-card>
+  </div>
+</ng-container>
+
+<mat-card *ngIf="!isLoading && category === null" class="category-details-card">
+  <mat-card-title>Produkt mit ID {{ this.productIdString }} konnte nicht gefunden werden</mat-card-title>
+</mat-card>
+

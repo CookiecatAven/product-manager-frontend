@@ -1,0 +1,33 @@
+h2 {
+  color: white !important;
+}
+.register-card {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+}
+
+mat-form-field {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.submit-button {
+  width: 100%;
+  color: white;
+}
+
+.white-text {
+  color: white !important;
+  text-decoration: none;
+}
+
+.error-message {
+  color: red;
+  margin-top: 10px;
+}

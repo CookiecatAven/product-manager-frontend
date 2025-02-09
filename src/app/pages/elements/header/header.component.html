@@ -1,0 +1,35 @@
+<mat-toolbar color="primary">
+  <div class="link-section">
+    <span>Product Manager</span>
+    <div>
+      <a mat-button routerLink="/products">
+        <mat-icon>storefront</mat-icon>
+        <span>Produkte</span>
+      </a>
+      <a mat-button routerLink="/categories">
+        <mat-icon>category</mat-icon>
+        <span>Kategorien</span>
+      </a>
+      <ng-container *ngIf="authService.isUserAdmin()">
+        <a mat-button routerLink="/users">
+          <mat-icon>group</mat-icon>
+          <span>Benutzer</span>
+        </a>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="user-section">
+    <ng-container *ngIf="authService.isUserLoggedIn()">
+      <span>Eingeloggt als {{authService.getUserEmail()}}</span>
+      <a mat-button routerLink="/auth/logout">
+        <mat-icon>logout</mat-icon>
+        Ausloggen
+      </a>
+    </ng-container>
+    <a *ngIf="!authService.isUserLoggedIn()" mat-button routerLink="/auth/login">
+      <mat-icon>login</mat-icon>
+      <span>Einloggen</span>
+    </a>
+  </div>
+</mat-toolbar>

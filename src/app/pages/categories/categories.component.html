@@ -1,0 +1,15 @@
+<div class="categories-header">
+  <h1>Kategorien</h1>
+  <button *ngIf="authService.isUserAdmin()" mat-raised-button color="primary" routerLink="/categories/create">
+    <mat-icon>add</mat-icon>
+    Kategorie hinzufügen
+  </button>
+</div>
+
+<div *ngIf="!loading" class="categories-container">
+  <mat-card *ngFor="let category of categories" appearance="outlined" [routerLink]="['/categories', category.id]" style="cursor: pointer;">
+    <mat-card-header>
+      <mat-card-title>{{ category.name }}</mat-card-title>
+    </mat-card-header>
+  </mat-card>
+</div>

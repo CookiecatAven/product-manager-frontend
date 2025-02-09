@@ -1,0 +1,27 @@
+<div class="products-header">
+  <h1>Produkte</h1>
+  <button *ngIf="authService.isUserAdmin()" mat-raised-button color="primary" routerLink="/products/create">
+    <mat-icon>add</mat-icon>
+    Produkt hinzufügen
+  </button>
+</div>
+
+<!-- Products grid -->
+<div *ngIf="!loading && !error" class="products-container">
+  <mat-card *ngFor="let product of products" appearance="outlined" [routerLink]="['/products', product.id]"
+            style="cursor: pointer;">
+    <mat-card-header>
+      <mat-card-title>{{ product.name }}</mat-card-title>
+    </mat-card-header>
+
+    <div class="image-container">
+      <img mat-card-image [src]="product.image" [alt]="product.name"
+           onerror="this.src = '/assets/no-image.png'">
+      <!-- https://stackoverflow.com/questions/36026428/angular2-show-placeholder-image-if-img-src-is-not-valid-->
+    </div>
+
+    <mat-card-content>
+      <p class="price" *ngIf="product.price">{{ product.price }} CHF</p>
+    </mat-card-content>
+  </mat-card>
+</div>
