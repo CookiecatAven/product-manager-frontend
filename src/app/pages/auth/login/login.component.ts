@@ -7,6 +7,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { UserControllerService } from '../../../openapi-client';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ import { UserControllerService } from '../../../openapi-client';
 export class LoginComponent {
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required, Validators.minLength(8),Validators.pattern(/^(?=.*\d)(?=.*[\W_]).{6,}$/)])
+    password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.pattern(/^(?=.*\d)(?=.*[\W_]).{6,}$/)])
   });
 
   loading = false;
@@ -34,8 +35,10 @@ export class LoginComponent {
 
   constructor(
     private userController: UserControllerService,
-  private router: Router
-  ){}
+    private router: Router,
+    private authService: AuthService
+  ) {
+  }
 
   onSubmit() {
     if (this.loginForm.invalid) return;
@@ -50,7 +53,7 @@ export class LoginComponent {
       next: (response) => {
         if (!response.token) throw new Error('No token received from server');
 
-        localStorage.setItem('ACCESS_TOKEN', response.token);
+        this.authService.login(response.token)
         console.log('Login erfolgreich!', response);
         this.router.navigate(['/products']);
       },
