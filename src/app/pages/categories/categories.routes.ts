@@ -20,8 +20,8 @@ export const categoriesRoutes: Routes = [
   },
   {
     path: 'edit/:id',
-    loadComponent: () => import('./categories-edit/categories-edit.component')
-      .then(m => m.CategoriesEditComponent),
+    loadComponent: () => import('./category-edit/category-edit.component')
+      .then(m => m.CategoryEditComponent),
     canActivate: [authGuard],
     data: { role: 'admin' }
   },
