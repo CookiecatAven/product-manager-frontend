@@ -1,22 +1,35 @@
 <mat-toolbar color="primary">
-  <span>Product Manager</span>
+  <div class="link-section">
+    <span>Product Manager</span>
+    <div>
+      <a mat-button routerLink="/products">
+        <mat-icon>storefront</mat-icon>
+        <span>Produkte</span>
+      </a>
+      <!-- todo nur anzeigen, wenn Admin -->
+      <a mat-button routerLink="/categories">
+        <mat-icon>category</mat-icon>
+        <span>Kategorien</span>
+      </a>
+      <!-- todo nur anzeigen, wenn Admin -->
+      <a mat-button routerLink="/users">
+        <mat-icon>group</mat-icon>
+        <span>Benutzer</span>
+      </a>
+    </div>
+  </div>
 
-  <span class="spacer"></span>
-
-  <!--  &lt;!&ndash; Dropdown-Menü &ndash;&gt;-->
-  <!--  <button mat-button [matMenuTriggerFor]="categoriesMenu">-->
-  <!--    Categories-->
-  <!--    <mat-icon>arrow_drop_down</mat-icon>-->
-  <!--  </button>-->
-
-  <mat-menu #categoriesMenu="matMenu">
-    <button mat-menu-item routerLink="/categories/list">
-      <mat-icon>list</mat-icon>
-      <span>List</span>
-    </button>
-    <button mat-menu-item routerLink="/categories/create">
-      <mat-icon>add</mat-icon>
-      <span>Create</span>
-    </button>
-  </mat-menu>
+  <div class="user-section">
+    <div *ngIf="authService.isUserLoggedIn()">
+      <span>Eingeloggt als {{authService.getUserEmail()}}</span>
+      <a mat-button routerLink="/auth/logout">
+        <mat-icon>logout</mat-icon>
+        Ausloggen
+      </a>
+    </div>
+    <a *ngIf="!authService.isUserLoggedIn()" mat-button routerLink="/auth/login">
+      <mat-icon>login</mat-icon>
+      <span>Einloggen</span>
+    </a>
+  </div>
 </mat-toolbar>

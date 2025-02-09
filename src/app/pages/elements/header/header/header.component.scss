@@ -1,0 +1,17 @@
+mat-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+
+  .link-section {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .user-section {
+    justify-self: right;
+    font-size: smaller;
+  }
+}
