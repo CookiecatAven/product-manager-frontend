@@ -80,9 +80,7 @@ export class ProductCreateComponent implements OnInit {
 
     this.productController.createProduct(productData).subscribe({
       next: () => {
-        this.router.navigate(['/products']).then(() => {
-          // Optional: Toast Message für erfolgreiche Erstellung
-        });
+        this.router.navigate(['/products'])
       },
       error: (error) => {
         console.error('Error creating product:', error);

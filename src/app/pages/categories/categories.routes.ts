@@ -8,8 +8,8 @@ export const categoriesRoutes: Routes = [
   },
   {
     path: 'create',
-    loadComponent: () => import('./categories-create/categories-create.component')
-      .then(m => m.CategoriesCreateComponent),
+    loadComponent: () => import('./category-create/category-create.component')
+      .then(m => m.CategoryCreateComponent),
     canActivate: [authGuard],
     data: { role: 'admin' }
   },
