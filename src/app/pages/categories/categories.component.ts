@@ -23,8 +23,8 @@ import { RouterLink } from '@angular/router';
   styleUrl: './categories.component.scss'
 })
 export class CategoriesComponent implements OnInit {
-
   categories: CategoryShowDto[] = [];
+  loading = true;
 
   constructor(private categoriesController: CategoryControllerService, protected authService: AuthService) {
   }
@@ -37,8 +37,10 @@ export class CategoriesComponent implements OnInit {
     this.categoriesController.getAllCategories().subscribe({
       next: categories => {
         this.categories = categories;
+        this.loading = false;
       },
       error: error => {
+        this.loading = false;
         console.error('Error loading categories:', error);
       }
     });

@@ -6,7 +6,7 @@
   </button>
 </div>
 
-<div class="categories-container">
+<div *ngIf="!loading" class="categories-container">
   <mat-card *ngFor="let category of categories" appearance="outlined" [routerLink]="['/categories', category.id]" style="cursor: pointer;">
     <mat-card-header>
       <mat-card-title>{{ category.name }}</mat-card-title>
