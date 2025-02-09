@@ -30,13 +30,14 @@ import { CommonModule, NgIf } from '@angular/common';
 })
 export class ProductDetailsComponent implements OnInit {
   product: ProductDetailDto | null = null;
-  isAdmin = true; // Falls du eine Berechtigungsprüfung hast, ersetze dies durch eine echte Prüfung.
 
   constructor(
     private route: ActivatedRoute,
     private productControllerService: ProductControllerService,
-    private router: Router
-  ) {}
+    private router: Router,
+    protected authService: AuthService
+  ) {
+  }
 
   ngOnInit(): void {
     const idString = this.route.snapshot.paramMap.get('id');

@@ -11,7 +11,7 @@
     <p><strong>Bestand:</strong> {{ product.stock }}</p>
   </mat-card-content>
 
-  <mat-card-actions *ngIf="isAdmin">
+  <mat-card-actions *ngIf="authService.isUserAdmin()">
     <button mat-button color="primary" (click)="updateProduct()">Bearbeiten</button>
     <button mat-button color="warn" (click)="deleteProduct()">Löschen</button>
   </mat-card-actions>
