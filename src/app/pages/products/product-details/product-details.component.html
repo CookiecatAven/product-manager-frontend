@@ -1,7 +1,9 @@
-<mat-card *ngIf="product" class="product-details-card">
+<pm-go-back-link/>
+<mat-card *ngIf="!isLoading && product" class="product-details-card">
   <mat-card-title>{{ product.name }}</mat-card-title>
 
-  <img mat-card-image [src]="product.image" alt="{{ product.name }}">
+  <img mat-card-image [src]="product.image" [alt]="product.name"
+       onerror="this.src = '/assets/dotdotdot.png'">
 
   <mat-card-content>
     <p><strong>Beschreibung:</strong> {{ product.description }}</p>
@@ -12,12 +14,12 @@
   </mat-card-content>
 
   <mat-card-actions *ngIf="authService.isUserAdmin()">
-    <button mat-button color="primary" (click)="updateProduct()">Bearbeiten</button>
+    <button mat-button color="primary" routerLink="/products/edit/{{product.id}}">Bearbeiten</button>
     <button mat-button color="warn" (click)="deleteProduct()">Löschen</button>
   </mat-card-actions>
 </mat-card>
 
-<mat-card *ngIf="product === null" class="product-details-card">
+<mat-card *ngIf="!isLoading && product === null" class="product-details-card">
   <mat-card-title>Produkt mit ID {{ this.productIdString }} konnte nicht gefunden werden</mat-card-title>
 </mat-card>
 

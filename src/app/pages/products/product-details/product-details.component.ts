@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ProductControllerService, ProductDetailDto } from '../../../openapi-client';
 import {
   MatCard,
@@ -12,6 +12,7 @@ import {
 import { MatButton } from '@angular/material/button';
 import { CommonModule, NgIf } from '@angular/common';
 import { AuthService } from '../../../services/auth.service';
+import { GoBackLinkComponent } from '../../elements/go-back-link/go-back-link.component';
 
 @Component({
   selector: 'app-product-details',
@@ -26,16 +27,19 @@ import { AuthService } from '../../../services/auth.service';
     NgIf,
     CommonModule,
     MatCardModule,
+    RouterLink,
+    GoBackLinkComponent,
   ],
   styleUrls: ['./product-details.component.scss']
 })
 export class ProductDetailsComponent implements OnInit {
   productIdString: string = '';
   product: ProductDetailDto | null = null;
+  isLoading = true;
 
   constructor(
     private route: ActivatedRoute,
-    private productControllerService: ProductControllerService,
+    private productController: ProductControllerService,
     private router: Router,
     protected authService: AuthService
   ) {
@@ -45,20 +49,16 @@ export class ProductDetailsComponent implements OnInit {
     this.productIdString = this.route.snapshot.paramMap.get('id') || '';
     const id = this.productIdString ? Number.parseInt(this.productIdString) : null;
     if (id) {
-      this.productControllerService.getProductById(id).subscribe((data) => {
-        this.product = data;
+      this.productController.getProductById(id).subscribe({
+        next: (data) => {
+          this.product = data;
+          this.isLoading = false;
+        },
+        error: (error: Error) => {
+          console.error('Error loading product:', error);
+          this.isLoading = false;
+        }
       });
-    }
-  }
-
-  updateProduct(): void {
-    // wenn wir kein Produkt haben, können wir nichts bearbeiten
-    if (!this.product) {
-      return
-    }
-
-    if (this.product) {
-      this.router.navigateByUrl(`/products/edit/${this.product.id}`); // Weiterleitung zur Modify-Seite
     }
   }
 
@@ -69,7 +69,7 @@ export class ProductDetailsComponent implements OnInit {
     }
 
     if (confirm('Willst du dieses Produkt wirklich löschen?')) {
-      this.productControllerService.deleteProductById(this.product.id).subscribe(() => {
+      this.productController.deleteProductById(this.product.id).subscribe(() => {
         alert('Produkt gelöscht!');
         this.router.navigate(['/products']);
       });
